@@ -1,5 +1,5 @@
 const fs = require('node:fs')
-const path = require('path')
+const path = require('node:path')
 
 // Ejercicio 2
 async function writeFile (filePath, data, callback) {
