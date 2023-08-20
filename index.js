@@ -21,7 +21,7 @@ async function writeFile (filePath, data, callback) {
 
   fs.writeFile(filePath, data, function (err) {
     if (err) {
-      console.log(`No se pudo escribir en el fichero ${filePath}`)
+      callback(new Error(`No se pudo escribir en el fichero ${filePath}`))
     } else {
       callback()
     }
