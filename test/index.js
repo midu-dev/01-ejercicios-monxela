@@ -90,4 +90,58 @@ test.describe('3. readFileAndCount', () => {
       done()
     })
   })
+
+  test.test('3.4 readFileAndCount, returns 1', (t, done) => {
+    const filePath = path.join('tmp', 'tmp.txt')
+    const text = 'node is a powerful runtime environment that allows you to build scalable and high-performance applications. With node, you can use JavaScript on the server-side, and it has a vast ecosystem of packages available through npm (node Package Manager).'
+
+    fs.mkdirSync(path.dirname(filePath), { recursive: true })
+    fs.writeFileSync(filePath, text)
+
+    process.argv[2] = './tmp/tmp.txt'
+
+    // call readFileAndCount
+    readFileAndCount('powerful', (err, count) => {
+      fs.rmSync('tmp', { recursive: true })
+      assert.ifError(err)
+      assert.strictEqual(count, 1)
+      done()
+    })
+  })
+
+  test.test('3.5 readFileAndCount, returns 3', (t, done) => {
+    const filePath = path.join('tmp', 'tmp.txt')
+    const text = 'node is a powerful runtime environment that allows you to build scalable and high-performance applications. With node, you can use JavaScript on the server-side, and it has a vast ecosystem of packages available through npm (node Package Manager).'
+
+    fs.mkdirSync(path.dirname(filePath), { recursive: true })
+    fs.writeFileSync(filePath, text)
+
+    process.argv[2] = './tmp/tmp.txt'
+
+    // call readFileAndCount
+    readFileAndCount('node', (err, count) => {
+      fs.rmSync('tmp', { recursive: true })
+      assert.ifError(err)
+      assert.strictEqual(count, 3)
+      done()
+    })
+  })
+
+  test.test('3.6 readFileAndCount, returns 0', (t, done) => {
+    const filePath = path.join('tmp', 'tmp.txt')
+    const text = 'node is a powerful runtime environment that allows you to build scalable and high-performance applications. With node, you can use JavaScript on the server-side, and it has a vast ecosystem of packages available through npm (node Package Manager).'
+
+    fs.mkdirSync(path.dirname(filePath), { recursive: true })
+    fs.writeFileSync(filePath, text)
+
+    process.argv[2] = './tmp/tmp.txt'
+
+    // call readFileAndCount
+    readFileAndCount('Powerful', (err, count) => {
+      fs.rmSync('tmp', { recursive: true })
+      assert.ifError(err)
+      assert.strictEqual(count, 0)
+      done()
+    })
+  })
 })
