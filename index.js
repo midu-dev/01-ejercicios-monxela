@@ -52,7 +52,8 @@ async function readFileAndCount (word, callback) {
     }
 
     const regExp = new RegExp(word, 'g')
-    callback(null, (data.match(regExp) || []).length)
+    const matches = (data.match(regExp) || []).length
+    callback(null, matches)
   })
 }
 
