@@ -7,12 +7,12 @@ async function writeFile (filePath, data, callback) {
   try {
     directory = path.dirname(filePath)
   } catch (exception) {
-    if (exception.name === 'TypeError') {
-      console.log('filePath no es una cadena de texto')
-    } else {
-      console.log(`Se ha producido un error al leer del directorio ${directory}`)
+    let message = 'filePath no es una cadena de texto'
+    if (exception.name !== 'TypeError') {
+      message = `Se ha producido un error al leer del directorio ${directory}`
     }
-    process.exit(1)
+    callback(new Error(message))
+    return
   }
 
   if (!fs.existsSync(directory)) {
