@@ -16,7 +16,7 @@ async function writeFile (filePath, data, callback) {
   }
 
   if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory, true)
+    fs.mkdirSync(directory, { recursive: true })
   }
 
   fs.writeFile(filePath, data, function (err) {
